@@ -14,8 +14,6 @@ spring:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:testdb
 
-# 전에 설치했던 docker 때문에 localhost가 아닌 host.docker.internal로 잡힌듯 하다.
-# C:\Windows\System32\Drivers\etc\hosts
 eureka:
   instance:
     instance-id: ${spring.cloud.client.ip-address}:${spring.application.instance_id:${random.value}}
