@@ -3,12 +3,16 @@ package com.example.userservice.service;
 import com.example.userservice.dto.UserDto;
 import com.example.userservice.jpa.UserEntity;
 import com.example.userservice.jpa.UserRepository;
+import com.example.userservice.vo.ResponseOrder;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -39,5 +43,26 @@ public class UserServiceImpl implements UserService{
 
         UserDto returnUserDto = mapper.map(userEntity, UserDto.class);
         return returnUserDto;
+    }
+    //Override는 이미 등록 되어있는 것을 재정의 하는것. 구현하지 않아도 오류발생 안한다.
+    //implement는 인터페이스에 있는 것을 가져온 것이기에 재정의를 해줘야한다.
+
+
+    @Override
+    public UserDto getUserByUserId(String userId) {
+        UserEntity userEntity = userRepository.findByUserId(userId);
+
+        if(userEntity == null){
+            throw new UsernameNotFoundException("User not found");
+        }
+        UserDto userDto = new ModelMapper().map(userEntity, UserDto.class);
+        List<ResponseOrder> orders = new ArrayList<>();
+        userDto.setOrders(orders);
+        return userDto;
+    }
+
+    @Override
+    public Iterable<UserEntity> getUserByAll() {
+        return userRepository.findAll();
     }
 }
