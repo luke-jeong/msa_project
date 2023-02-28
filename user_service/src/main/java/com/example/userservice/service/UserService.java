@@ -2,8 +2,11 @@ package com.example.userservice.service;
 
 import com.example.userservice.dto.UserDto;
 import com.example.userservice.jpa.UserEntity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface UserService {
+//webSecurity에서 auth.userDetailsService에 넣기위해서는 UserDetailService를 상속받은 서비스여야함
+// 상속 받았으니까 impl에서 구현 필요
+public interface UserService extends UserDetailsService {
     UserDto createUser(UserDto userDto);
 
     UserDto getUserByUserId(String userId);

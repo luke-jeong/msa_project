@@ -3,6 +3,7 @@ package com.example.userservice.controller;
 import com.example.userservice.dto.UserDto;
 import com.example.userservice.jpa.UserEntity;
 import com.example.userservice.service.UserService;
+import com.example.userservice.service.UserServiceImpl;
 import com.example.userservice.vo.Greeting;
 import com.example.userservice.vo.RequestUser;
 import com.example.userservice.vo.ResponseUser;
@@ -18,19 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user-service")
+//api gaetway의 application.yml에서 url 처리를 해줬기 때문에 requestMapping에서 user-service 명시해줄 필요 없음
+@RequestMapping("/")
 public class UserController {
-    private Environment env;
-    private UserService userService;
+    Environment env;
+    UserService userService;
+    Greeting greeting;
 
-    @Autowired
-    private Greeting greeting;
-
-    @Autowired
-    public UserController(Environment env, UserService userService) {
-        this.userService = userService;
-        this.env = env;
-    }
 
     @GetMapping("/health_check")
     public String status() {
