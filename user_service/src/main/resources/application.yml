@@ -25,3 +25,9 @@ eureka:
 
 greeting:
   message: Welcome to the simple ecommerce
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans

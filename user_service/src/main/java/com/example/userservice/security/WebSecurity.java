@@ -31,9 +31,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     //권한에 관련된 configure override
     protected void configure(HttpSecurity http) throws Exception{
         http.csrf().disable();
-//        http.authorizeRequests().antMatchers("/users/**").permitAll();
-        http.authorizeRequests().antMatchers("/**")
-                .access("hasIpAddress('192.168.1.100') or hasIpAddress('127.0.0.1')")
+        http.authorizeRequests().antMatchers("/actuator/**").permitAll();
+        http.authorizeRequests()
+//                .antMatchers("/**")
+//                .hasIpAddress("127.0.0.1")
+                .antMatchers("/**").permitAll()
                 .and()
                 .addFilter(getAuthenticationFilter());
         //화면 프레임 나뉘는 부분 disable
