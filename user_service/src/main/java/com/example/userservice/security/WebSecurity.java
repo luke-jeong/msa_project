@@ -32,10 +32,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/actuator/**").permitAll();
+        http.authorizeRequests().antMatchers("/health_check/**").permitAll();
         http.authorizeRequests()
-//                .antMatchers("/**")
-//                .hasIpAddress("127.0.0.1")
-                .antMatchers("/**").permitAll()
+                .antMatchers("/**")
+                .hasIpAddress("192.168.0.11")
                 .and()
                 .addFilter(getAuthenticationFilter());
         //화면 프레임 나뉘는 부분 disable
@@ -43,7 +43,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     }
 
     private AuthenticationFilter getAuthenticationFilter() throws Exception {
-        AuthenticationFilter authenticationFilter = new AuthenticationFilter();
+        AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManager(), userService, env);
         authenticationFilter.setAuthenticationManager(authenticationManager());
 
         return authenticationFilter;
