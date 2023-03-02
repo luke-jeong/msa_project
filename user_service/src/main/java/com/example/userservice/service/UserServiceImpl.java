@@ -93,6 +93,6 @@ public class UserServiceImpl implements UserService{
             throw new UsernameNotFoundException(email);
         }
         UserDto userDto = new ModelMapper().map(userEntity, UserDto.class);
-        return null;
+        return userDto;
     }
 }
