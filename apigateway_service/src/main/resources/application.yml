@@ -52,6 +52,8 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+            - AuthorizationHeaderFilter
+#            - 회원가입과 로그인을 제외한 페이지에서는 jwt 확인
         - id: catalog-service
           uri: lb://CATALOG-SERVICE
           predicates:
@@ -69,3 +71,6 @@ spring:
                 baseMessage: Hi, there
                 preLogger: true
                 postLogger: true
+
+token:
+  secret: user_token
