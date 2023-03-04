@@ -19,9 +19,10 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
     Environment env;
 
     public AuthorizationHeaderFilter(Environment env) {
+    //Config 정보를 filter에 적용하는 부가정보로써 casting 시켜주는 작업을 부모 클래스에 알려줘야함
+        super(Config.class);
         this.env = env;
     }
-
     public static class Config{}
 
 //    token 검증. user-service에서 헤더로 넘겨준 token, userId를 가져와서 확인한다
