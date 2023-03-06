@@ -1,0 +1,6 @@
+encrypt:
+#  key: asdf1234
+  key-store:
+    location: file:///C:/dev/study/keystore/apiEncryptionKey.jks
+    password: test112
+    alias: apiEncryptionKey

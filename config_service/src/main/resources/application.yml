@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: config-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   profiles:
     active: native
   cloud:
@@ -14,3 +19,8 @@ spring:
         git:
 #          uri: file:///C:\dev\study\git-local-repo
           uri: https://github.com/luke-jeong/msa_project_config.git
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, busrefresh
