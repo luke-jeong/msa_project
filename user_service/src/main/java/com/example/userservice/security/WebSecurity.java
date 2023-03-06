@@ -35,7 +35,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/health_check/**").permitAll();
         http.authorizeRequests()
                 .antMatchers("/**")
-                .hasIpAddress("192.168.0.11")
+                .hasIpAddress("192.168.1.100")
                 .and()
                 .addFilter(getAuthenticationFilter());
         //화면 프레임 나뉘는 부분 disable
