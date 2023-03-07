@@ -1,5 +1,7 @@
 package com.example.userservice;
 
+import com.example.userservice.error.FeignErrorDecoder;
+import feign.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -30,4 +32,15 @@ public class UserServiceApplication {
 		return new RestTemplate();
 	}
 	//LoadBalanced 추가하면서 user-service.yml에서 url을 order-service로 변경
+
+	@Bean
+	public Logger.Level feignLoggerLevel() {
+		return Logger.Level.FULL;
+	}
+
+	//Component 로 등록한 뒤부터는 bean으로 등록할 필요 없다.
+//	@Bean
+//	public FeignErrorDecoder getFeignErrorDecoder() {
+//		return new FeignErrorDecoder();
+//	}
 }
